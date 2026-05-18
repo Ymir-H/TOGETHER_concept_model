@@ -63,7 +63,7 @@ const INTERSECTIONS = [
   {
     id: "i123",
     clipOf: "c1", clipBy: ["c2", "c3"],
-    label: "7",
+    label: "Societal Resilience",
     lx: 270, ly: 254,
     title: "A ∩ B ∩ C",
     details: "The center where all three circles meet. Edit this in script.js."
