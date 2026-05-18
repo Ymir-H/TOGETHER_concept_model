@@ -4,93 +4,70 @@
 
 const CIRCLES = [
   {
-    id: "leadership",
-    label: "Leadership",
-    cx: 195, cy: 170, r: 118,
+    id: "c1",
+    label: "1",
+    cx: 270, cy: 155, r: 130,
+    lx: 270, ly: 98,
     color: "#4361ee",
-    title: "Leadership",
-    details: "The ability to guide teams, set direction, and make decisions under uncertainty. Good leaders amplify the strengths of everyone around them and create the conditions for others to do their best work."
+    title: "Circle A",
+    details: "Unique to Circle A. Edit this in script.js to describe what belongs only here."
   },
   {
-    id: "technical",
-    label: "Technical",
-    cx: 368, cy: 170, r: 118,
+    id: "c2",
+    label: "2",
+    cx: 355, cy: 295, r: 130,
+    lx: 412, ly: 322,
     color: "#f72585",
-    title: "Technical Skills",
-    details: "Core engineering and systems thinking — writing code, architecting solutions, debugging complex problems, and continuously learning as the landscape evolves."
+    title: "Circle B",
+    details: "Unique to Circle B. Edit this in script.js to describe what belongs only here."
   },
   {
-    id: "creative",
-    label: "Creative",
-    cx: 115, cy: 328, r: 104,
-    color: "#7209b7",
-    title: "Creative",
-    details: "Generating novel ideas and approaching problems from unexpected angles. Creativity isn't only about art — it's the willingness to experiment and the courage to pursue ideas that don't exist yet."
-  },
-  {
-    id: "analytical",
-    label: "Analytical",
-    cx: 448, cy: 328, r: 104,
-    color: "#f77f00",
-    title: "Analytical",
-    details: "Breaking down complex problems, interpreting data, spotting patterns, and forming evidence-based conclusions. The foundation of sound decision-making in any field."
-  },
-  {
-    id: "communication",
-    label: "Communication",
-    cx: 282, cy: 306, r: 118,
+    id: "c3",
+    label: "3",
+    cx: 185, cy: 295, r: 130,
+    lx: 128, ly: 322,
     color: "#06d6a0",
-    title: "Communication",
-    details: "Expressing ideas clearly in writing and speech, listening actively, and adapting your message to the audience. The force-multiplier for every other skill on this diagram."
-  }
+    title: "Circle C",
+    details: "Unique to Circle C. Edit this in script.js to describe what belongs only here."
+  },
 ];
 
-// Each intersection references two circle IDs.
-// "clipOf" is the circle whose shape is used as the overlay.
-// "clipBy" is the circle that clips it — giving the intersection region.
+// Pairwise entries come first (lower z-order); triple is last (topmost, wins center clicks).
+// clipBy as a string → pairwise intersection.
+// clipBy as an array [b, c] → triple intersection using nested clipPath.
 const INTERSECTIONS = [
   {
-    id: "ix-lead-tech",
-    clipOf: "technical", clipBy: "leadership",
-    title: "Technical Leadership",
-    details: "Leading engineering teams — setting technical standards, mentoring engineers, and making architecture decisions that balance speed with long-term maintainability."
+    id: "i12",
+    clipOf: "c1", clipBy: "c2",
+    label: "4",
+    lx: 328, ly: 210,
+    title: "A ∩ B",
+    details: "The overlap between Circle A and Circle B. Edit this in script.js."
   },
   {
-    id: "ix-lead-creative",
-    clipOf: "creative", clipBy: "leadership",
-    title: "Visionary Leadership",
-    details: "Inspiring creative direction and building a culture of innovation. The courage to pursue bold, unproven ideas and bring a team along for the journey."
+    id: "i23",
+    clipOf: "c2", clipBy: "c3",
+    label: "5",
+    lx: 270, ly: 322,
+    title: "B ∩ C",
+    details: "The overlap between Circle B and Circle C. Edit this in script.js."
   },
   {
-    id: "ix-lead-comm",
-    clipOf: "communication", clipBy: "leadership",
-    title: "Influence",
-    details: "Rallying stakeholders, negotiating priorities, and communicating strategy in a way that motivates action. The art of getting alignment without relying on authority."
+    id: "i13",
+    clipOf: "c1", clipBy: "c3",
+    label: "6",
+    lx: 212, ly: 210,
+    title: "A ∩ C",
+    details: "The overlap between Circle A and Circle C. Edit this in script.js."
   },
   {
-    id: "ix-tech-anal",
-    clipOf: "analytical", clipBy: "technical",
-    title: "Data Engineering",
-    details: "Building systems that collect, store, and process data at scale — pipelines, warehouses, and infrastructure that turns raw events into reliable, queryable assets."
+    id: "i123",
+    clipOf: "c1", clipBy: ["c2", "c3"],
+    label: "7",
+    lx: 270, ly: 254,
+    title: "A ∩ B ∩ C",
+    details: "The center where all three circles meet. Edit this in script.js."
   },
-  {
-    id: "ix-tech-comm",
-    clipOf: "communication", clipBy: "technical",
-    title: "Developer Relations",
-    details: "Bridging technical depth with clear communication — writing great documentation, giving talks, and supporting communities to help others build successfully."
-  },
-  {
-    id: "ix-creative-comm",
-    clipOf: "communication", clipBy: "creative",
-    title: "Storytelling",
-    details: "Crafting narratives that engage and stick. Using design and language together to make ideas land with emotional resonance. The most human of all skills."
-  },
-  {
-    id: "ix-anal-comm",
-    clipOf: "communication", clipBy: "analytical",
-    title: "Data Storytelling",
-    details: "Translating analysis into decisions — presenting findings in ways that non-technical stakeholders can understand and act on. Numbers only matter if they change minds."
-  }
 ];
 
 // ─────────────────────────────────────────────
@@ -136,20 +113,38 @@ function activate(e, item, el, dotColor) {
 }
 
 function render() {
-  const defs          = document.getElementById("clip-defs");
-  const circlesLayer  = document.getElementById("g-circles");
-  const ixLayer       = document.getElementById("g-intersections");
-  const labelsLayer   = document.getElementById("g-labels");
+  const defs         = document.getElementById("clip-defs");
+  const circlesLayer = document.getElementById("g-circles");
+  const ixLayer      = document.getElementById("g-intersections");
+  const labelsLayer  = document.getElementById("g-labels");
 
-  // Clip paths for intersection regions
-  INTERSECTIONS.forEach(ix => {
-    const bound = circleMap[ix.clipBy];
-    const cp    = svgEl("clipPath", { id: `cp-${ix.id}` });
-    cp.appendChild(svgEl("circle", { cx: bound.cx, cy: bound.cy, r: bound.r }));
+  // Per-circle base clipPaths — required for the nested triple intersection clip.
+  CIRCLES.forEach(c => {
+    const cp = svgEl("clipPath", { id: `cp-${c.id}` });
+    cp.appendChild(svgEl("circle", { cx: c.cx, cy: c.cy, r: c.r }));
     defs.appendChild(cp);
   });
 
-  // Base circles
+  // Intersection clipPaths.
+  INTERSECTIONS.forEach(ix => {
+    const cp = svgEl("clipPath", { id: `cp-${ix.id}` });
+    if (Array.isArray(ix.clipBy)) {
+      // Triple: circle[clipBy[0]] clipped by cp-clipBy[1] → represents clipBy[0] ∩ clipBy[1].
+      // Applying this to clipOf circle gives clipOf ∩ clipBy[0] ∩ clipBy[1].
+      const b = circleMap[ix.clipBy[0]];
+      const inner = svgEl("circle", {
+        cx: b.cx, cy: b.cy, r: b.r,
+        "clip-path": `url(#cp-${ix.clipBy[1]})`,
+      });
+      cp.appendChild(inner);
+    } else {
+      const b = circleMap[ix.clipBy];
+      cp.appendChild(svgEl("circle", { cx: b.cx, cy: b.cy, r: b.r }));
+    }
+    defs.appendChild(cp);
+  });
+
+  // Base circles — handle clicks for unique regions (1, 2, 3).
   CIRCLES.forEach(c => {
     const circle = svgEl("circle", {
       cx: c.cx, cy: c.cy, r: c.r,
@@ -161,7 +156,7 @@ function render() {
     circlesLayer.appendChild(circle);
   });
 
-  // Intersection overlays — rendered above circles so they win hit testing
+  // Intersection overlays — pairwise first, triple last so it wins center clicks (regions 4–7).
   INTERSECTIONS.forEach(ix => {
     const src     = circleMap[ix.clipOf];
     const overlay = svgEl("circle", {
@@ -173,12 +168,29 @@ function render() {
     ixLayer.appendChild(overlay);
   });
 
-  // Labels (non-interactive)
+  // Non-interactive region labels — one per clickable area (7 total).
   CIRCLES.forEach(c => {
-    const txt = svgEl("text", { x: c.cx, y: c.cy, class: "venn-label" });
+    const txt = svgEl("text", { x: c.lx, y: c.ly, class: "venn-label" });
     txt.textContent = c.label;
+    labelsLayer.appendChild(txt);
+  });
+  INTERSECTIONS.forEach(ix => {
+    const txt = svgEl("text", { x: ix.lx, y: ix.ly, class: "venn-label" });
+    txt.textContent = ix.label;
     labelsLayer.appendChild(txt);
   });
 }
 
 render();
+
+document.addEventListener("click", () => {
+  if (!activeEl) return;
+  activeEl.classList.remove("active");
+  activeEl = null;
+  const panel = document.getElementById("panel");
+  panel.classList.add("fading");
+  setTimeout(() => {
+    panel.innerHTML = '<p class="hint">Click a circle or an overlapping region to learn more.</p>';
+    panel.classList.remove("fading");
+  }, 140);
+});

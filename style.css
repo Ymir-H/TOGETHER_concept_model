@@ -48,10 +48,10 @@ h1 {
   fill: #ffffff;
   fill-opacity: 0;
   pointer-events: all;
-  transition: fill-opacity 0.2s ease;
+  transition: fill-opacity 0.2s ease, filter 0.2s ease;
 }
-.venn-intersection:hover  { fill-opacity: 0.14; }
-.venn-intersection.active { fill-opacity: 0.22; }
+.venn-intersection:hover  { fill-opacity: 0.28; filter: drop-shadow(0 0 10px rgba(255,255,255,0.55)); }
+.venn-intersection.active { fill-opacity: 0.36; filter: drop-shadow(0 0 12px rgba(255,255,255,0.70)); }
 
 .venn-label {
   pointer-events: none;
