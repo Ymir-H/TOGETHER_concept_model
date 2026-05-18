@@ -1,0 +1,127 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0d0d1a;
+  color: #e0e0f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+  gap: 1.5rem;
+}
+
+h1 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff88;
+}
+
+.layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 980px;
+}
+
+/* ── SVG diagram ── */
+#venn {
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.venn-circle {
+  cursor: pointer;
+  transition: fill-opacity 0.25s ease, filter 0.25s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.venn-circle:hover  { fill-opacity: 0.62 !important; filter: brightness(1.25); }
+.venn-circle.active { fill-opacity: 0.68 !important; filter: brightness(1.35); }
+
+.venn-intersection {
+  cursor: pointer;
+  fill: #ffffff;
+  fill-opacity: 0;
+  pointer-events: all;
+  transition: fill-opacity 0.2s ease;
+}
+.venn-intersection:hover  { fill-opacity: 0.14; }
+.venn-intersection.active { fill-opacity: 0.22; }
+
+.venn-label {
+  pointer-events: none;
+  user-select: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  fill: #ffffffdd;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+@keyframes pulse {
+  0%   { filter: brightness(1.4) drop-shadow(0 0  6px #fff8); }
+  45%  { filter: brightness(1.7) drop-shadow(0 0 20px #fffb); }
+  100% { filter: brightness(1.4) drop-shadow(0 0  6px #fff8); }
+}
+.venn-circle.clicked,
+.venn-intersection.clicked { animation: pulse 0.35s ease; }
+
+/* ── Side panel ── */
+#panel {
+  flex: 1;
+  min-width: 220px;
+  background: #13132a;
+  border: 1px solid #ffffff12;
+  border-radius: 14px;
+  padding: 1.6rem 1.5rem;
+  min-height: 180px;
+  transition: opacity 0.15s ease;
+}
+#panel.fading { opacity: 0; }
+
+#panel-type {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #ffffff40;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#panel-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+#panel-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+#panel-body {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #a0a0c0;
+}
+.hint {
+  color: #ffffff28;
+  font-style: italic;
+  font-size: 0.88rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 680px) {
+  .layout { flex-direction: column; align-items: stretch; }
+  #venn   { width: 100%; height: auto; }
+}
