@@ -70,6 +70,65 @@ const INTERSECTIONS = [
   },
 ];
 
+// Pairwise entries come first (lower z-order); triple is last (topmost, wins center clicks).
+// bi:true = bidirectional (marker on both ends); bi:false = single direction (marker-end only).
+const ARROW_SETS = [
+  {
+    id: 'green',
+    color: '#ffd700',
+    label: 'Green',
+    title: 'Bilateral Relationships',
+    details: 'Long-range bilateral connections between all three actors. Edit this in script.js to describe what this relationship type represents.',
+    arrows: [
+      { x1: 338, y1: 72,  x2: 448, y2: 318, bi: true },
+      { x1: 202, y1: 72,  x2: 92,  y2: 318, bi: true },
+      { x1: 165, y1: 408, x2: 375, y2: 408, bi: true },
+    ]
+  },
+  {
+    id: 'orange',
+    color: '#ff7043',
+    label: 'Orange',
+    title: 'Collaborative Flows',
+    details: 'Closer-range bilateral connections between each pair of actors. Edit this in script.js to describe what this relationship type represents.',
+    arrows: [
+      // Region 6 (c1∩c3): one arrow from each contributing circle
+      { x1: 255, y1: 112, x2: 220, y2: 205, bi: false },  // 1 → 6
+      { x1: 165, y1: 318, x2: 208, y2: 218, bi: false },  // 3 → 6
+      // Region 4 (c1∩c2): one arrow from each contributing circle
+      { x1: 285, y1: 112, x2: 320, y2: 205, bi: false },  // 1 → 4
+      { x1: 375, y1: 318, x2: 332, y2: 218, bi: false },  // 2 → 4
+      // Region 5 (c2∩c3): one arrow from each contributing circle
+      { x1: 370, y1: 330, x2: 285, y2: 325, bi: false },  // 2 → 5
+      { x1: 170, y1: 330, x2: 255, y2: 325, bi: false },  // 3 → 5
+    ]
+  },
+  {
+    id: 'blue',
+    color: '#29b6f6',
+    label: 'Blue',
+    title: 'Direct Contributions',
+    details: "Each actor’s unique area contributes directly toward the center (region 7). Edit this in script.js to describe what this flow represents.",
+    arrows: [
+      { x1: 270, y1: 112, x2: 270, y2: 232, bi: false },
+      { x1: 392, y1: 295, x2: 304, y2: 259, bi: false },
+      { x1: 148, y1: 295, x2: 236, y2: 259, bi: false },
+    ]
+  },
+  {
+    id: 'purple',
+    color: '#ce93d8',
+    label: 'Purple',
+    title: 'Partnership Contributions',
+    details: 'Flows from each pairwise overlap into the shared center. Where two actors already collaborate, that synergy feeds into the core. Edit this in script.js.',
+    arrows: [
+      { x1: 316, y1: 204, x2: 283, y2: 247, bi: false },
+      { x1: 270, y1: 310, x2: 270, y2: 263, bi: false },
+      { x1: 224, y1: 204, x2: 257, y2: 247, bi: false },
+    ]
+  },
+];
+
 // ─────────────────────────────────────────────
 //  RENDERING
 // ─────────────────────────────────────────────
@@ -77,7 +136,9 @@ const INTERSECTIONS = [
 const SVG_NS   = "http://www.w3.org/2000/svg";
 const circleMap = Object.fromEntries(CIRCLES.map(c => [c.id, c]));
 
-let activeEl = null;
+let activeEl        = null;
+let activePanelItem  = null;
+let activePanelColor = null;
 
 function svgEl(tag, attrs) {
   const node = document.createElementNS(SVG_NS, tag);
@@ -89,11 +150,11 @@ function showPanel(item, dotColor) {
   const panel = document.getElementById("panel");
   panel.classList.add("fading");
   setTimeout(() => {
-    const isIntersection = !item.color;
+    const typeLabel = item.arrows ? 'Arrow set' : item.color ? 'Skill area' : 'Intersection';
     panel.innerHTML = `
       <div id="panel-type">
         ${dotColor ? `<span id="panel-dot" style="background:${dotColor}"></span>` : ""}
-        ${isIntersection ? "Intersection" : "Skill area"}
+        ${typeLabel}
       </div>
       <h2 id="panel-title">${item.title}</h2>
       <p  id="panel-body">${item.details}</p>
@@ -109,7 +170,22 @@ function activate(e, item, el, dotColor) {
   void el.offsetWidth; // restart animation
   el.classList.add("clicked", "active");
   activeEl = el;
+  activePanelItem  = item;
+  activePanelColor = dotColor;
   showPanel(item, dotColor);
+}
+
+function restorePanel() {
+  if (activePanelItem) {
+    showPanel(activePanelItem, activePanelColor);
+  } else {
+    const panel = document.getElementById("panel");
+    panel.classList.add("fading");
+    setTimeout(() => {
+      panel.innerHTML = '<p class="hint">Click a circle or an overlapping region to learn more.</p>';
+      panel.classList.remove("fading");
+    }, 140);
+  }
 }
 
 function render() {
@@ -181,12 +257,99 @@ function render() {
   });
 }
 
+function renderArrows() {
+  const arrowLayer = document.getElementById("g-arrows");
+  const toggleDiv  = document.getElementById("arrow-toggles");
+
+  const HEAD_LEN = 13;  // arrowhead length in px
+  const HEAD_W   = 7;   // arrowhead half-width in px
+
+  // Returns SVG polygon points string for an arrowhead tip at (tx,ty) pointing in `angle`.
+  function headPoints(tx, ty, angle) {
+    const bx = tx - HEAD_LEN * Math.cos(angle);
+    const by = ty - HEAD_LEN * Math.sin(angle);
+    const lx = bx + HEAD_W * Math.cos(angle + Math.PI / 2);
+    const ly = by + HEAD_W * Math.sin(angle + Math.PI / 2);
+    const rx = bx - HEAD_W * Math.cos(angle + Math.PI / 2);
+    const ry = by - HEAD_W * Math.sin(angle + Math.PI / 2);
+    return `${tx},${ty} ${lx},${ly} ${rx},${ry}`;
+  }
+
+  ARROW_SETS.forEach(set => {
+    const group = svgEl("g", { id: `arrows-${set.id}`, class: "arrow-group" });
+    group.style.display = "none";
+
+    set.arrows.forEach(a => {
+      const angle = Math.atan2(a.y2 - a.y1, a.x2 - a.x1);
+
+      // Shaft endpoints pulled back from the tips so the line stops at the arrowhead base.
+      const sx2 = a.x2 - HEAD_LEN * Math.cos(angle);
+      const sy2 = a.y2 - HEAD_LEN * Math.sin(angle);
+      const sx1 = a.bi ? a.x1 + HEAD_LEN * Math.cos(angle) : a.x1;
+      const sy1 = a.bi ? a.y1 + HEAD_LEN * Math.sin(angle) : a.y1;
+
+      // Visible shaft — not interactive, purely visual.
+      group.appendChild(svgEl("line", {
+        x1: sx1, y1: sy1, x2: sx2, y2: sy2,
+        stroke: set.color, "stroke-width": "5", "stroke-linecap": "butt",
+        "pointer-events": "none",
+      }));
+
+      // Wide transparent hit area covering the full arrow length including arrowhead zones.
+      const hit = svgEl("line", {
+        x1: a.x1, y1: a.y1, x2: a.x2, y2: a.y2,
+        stroke: "rgba(255,255,255,0)", "stroke-width": "18",
+        "pointer-events": "all",
+      });
+      hit.addEventListener("click", e => { e.stopPropagation(); activePanelItem = set; activePanelColor = set.color; showPanel(set, set.color); });
+      group.appendChild(hit);
+
+      // Arrowhead polygon at (x2, y2) — visible and clickable.
+      const h2 = svgEl("polygon", {
+        points: headPoints(a.x2, a.y2, angle),
+        fill: set.color, "pointer-events": "all",
+      });
+      h2.addEventListener("click", e => { e.stopPropagation(); activePanelItem = set; activePanelColor = set.color; showPanel(set, set.color); });
+      group.appendChild(h2);
+
+      // Second arrowhead at (x1, y1) for bidirectional arrows.
+      if (a.bi) {
+        const h1 = svgEl("polygon", {
+          points: headPoints(a.x1, a.y1, angle + Math.PI),
+          fill: set.color, "pointer-events": "all",
+        });
+        h1.addEventListener("click", e => { e.stopPropagation(); activePanelItem = set; activePanelColor = set.color; showPanel(set, set.color); });
+        group.appendChild(h1);
+      }
+    });
+
+    arrowLayer.appendChild(group);
+
+    const btn = document.createElement("button");
+    btn.className = "arrow-btn";
+    btn.textContent = set.label;
+    btn.style.setProperty("--set-color", set.color);
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      const visible = btn.classList.toggle("active");
+      group.style.display = visible ? "block" : "none";
+      activePanelItem  = visible ? set  : null;
+      activePanelColor = visible ? set.color : null;
+      if (visible) showPanel(set, set.color);
+    });
+    btn.addEventListener("mouseenter", () => showPanel(set, set.color));
+    btn.addEventListener("mouseleave", restorePanel);
+    toggleDiv.appendChild(btn);
+  });
+}
+
 render();
+renderArrows();
 
 document.addEventListener("click", () => {
-  if (!activeEl) return;
-  activeEl.classList.remove("active");
-  activeEl = null;
+  if (activeEl) { activeEl.classList.remove("active"); activeEl = null; }
+  activePanelItem  = null;
+  activePanelColor = null;
   const panel = document.getElementById("panel");
   panel.classList.add("fading");
   setTimeout(() => {

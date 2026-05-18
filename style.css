@@ -121,6 +121,36 @@ h1 {
   margin-top: 0.5rem;
 }
 
+/* ── Arrow toggles ── */
+#arrow-toggles {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.arrow-btn {
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+  border: 2px solid var(--set-color);
+  background: transparent;
+  color: var(--set-color);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+.arrow-btn:hover:not(.active) { opacity: 0.75; }
+.arrow-btn.active {
+  background: var(--set-color);
+  color: #fff;
+}
+
+.arrow-line { transition: stroke-opacity 0.15s ease; }
+.arrow-line:hover { stroke-opacity: 0.65; cursor: pointer; }
+
 @media (max-width: 680px) {
   .layout { flex-direction: column; align-items: stretch; }
   #venn   { width: 100%; height: auto; }
