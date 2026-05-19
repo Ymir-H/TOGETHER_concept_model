@@ -39,7 +39,7 @@ const INTERSECTIONS = [
   {
     id: "i12",
     clipOf: "c1", clipBy: "c2",
-    label: "Public-civil <br> collaboration",
+    label: "",
     lx: 328, ly: 210,
     title: "Public-civil collaboration",
     details: "Public-civil collaboration refers to partnerships between governments, public institutions, civil society organizations, community groups, academia, and other non-governmental stakeholders to strengthen disaster risk reduction, resilience, and sustainable development. By combining public sector leadership, policy, and coordination with the local knowledge, advocacy, and community engagement of civil society, these collaborations help promote inclusive decision-making, strengthen preparedness, reduce vulnerabilities, and support resilient communities and public systems."
@@ -47,7 +47,7 @@ const INTERSECTIONS = [
   {
     id: "i23",
     clipOf: "c2", clipBy: "c3",
-    label: "Private-civil <br> collaboration",
+    label: "",
     lx: 270, ly: 322,
     title: "Private-civil collaboration",
     details: "Private-civil collaboration refers to partnerships between businesses, civil society organizations, community groups, academia, and other non-governmental stakeholders to advance disaster risk reduction, resilience, and sustainable development. By combining private sector innovation, resources, and technical expertise with the local knowledge, advocacy, and community engagement of civil society, these collaborations help strengthen preparedness, promote inclusive and people-centered solutions, and support more resilient communities and livelihoods."
@@ -55,7 +55,7 @@ const INTERSECTIONS = [
   {
     id: "i13",
     clipOf: "c1", clipBy: "c3",
-    label: "Public-private <br> collaboration",
+    label: "",
     lx: 212, ly: 210,
     title: "Public-private collaboration",
     details: "Public-private collaboration brings together governments, international organizations, businesses, and other private sector partners to strengthen disaster risk reduction, resilience, and sustainable development. By combining public leadership and policy with private sector innovation, technology, investment, and expertise, these partnerships help communities and economies better prepare for disasters, reduce risks and vulnerabilities, and build more resilient infrastructure and systems."
