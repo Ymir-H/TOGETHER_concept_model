@@ -39,15 +39,15 @@ const INTERSECTIONS = [
   {
     id: "i12",
     clipOf: "c1", clipBy: "c2",
-    label: "Public-civil collaboration",
+    label: "Public-civil <br> collaboration",
     lx: 328, ly: 210,
-    title: "Public-civil \ncollaboration",
+    title: "Public-civil collaboration",
     details: "Public-civil collaboration refers to partnerships between governments, public institutions, civil society organizations, community groups, academia, and other non-governmental stakeholders to strengthen disaster risk reduction, resilience, and sustainable development. By combining public sector leadership, policy, and coordination with the local knowledge, advocacy, and community engagement of civil society, these collaborations help promote inclusive decision-making, strengthen preparedness, reduce vulnerabilities, and support resilient communities and public systems."
   },
   {
     id: "i23",
     clipOf: "c2", clipBy: "c3",
-    label: "Private-civil \ncollaboration",
+    label: "Private-civil <br> collaboration",
     lx: 270, ly: 322,
     title: "Private-civil collaboration",
     details: "Private-civil collaboration refers to partnerships between businesses, civil society organizations, community groups, academia, and other non-governmental stakeholders to advance disaster risk reduction, resilience, and sustainable development. By combining private sector innovation, resources, and technical expertise with the local knowledge, advocacy, and community engagement of civil society, these collaborations help strengthen preparedness, promote inclusive and people-centered solutions, and support more resilient communities and livelihoods."
@@ -55,7 +55,7 @@ const INTERSECTIONS = [
   {
     id: "i13",
     clipOf: "c1", clipBy: "c3",
-    label: "Public-private \ncollaboration",
+    label: "Public-private <br> collaboration",
     lx: 212, ly: 210,
     title: "Public-private collaboration",
     details: "Public-private collaboration brings together governments, international organizations, businesses, and other private sector partners to strengthen disaster risk reduction, resilience, and sustainable development. By combining public leadership and policy with private sector innovation, technology, investment, and expertise, these partnerships help communities and economies better prepare for disasters, reduce risks and vulnerabilities, and build more resilient infrastructure and systems."
@@ -150,7 +150,7 @@ function showPanel(item, dotColor) {
   const panel = document.getElementById("panel");
   panel.classList.add("fading");
   setTimeout(() => {
-    const typeLabel = item.arrows ? 'Arrow set' : item.color ? 'Skill area' : 'Intersection';
+    const typeLabel = item.arrows ? 'Arrow set' : item.color ? 'Sectors' : 'Intersection';
     panel.innerHTML = `
       <div id="panel-type">
         ${dotColor ? `<span id="panel-dot" style="background:${dotColor}"></span>` : ""}
