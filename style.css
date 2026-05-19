@@ -32,6 +32,7 @@ h1 {
 #venn {
   flex-shrink: 0;
   overflow: visible;
+  height: 650px;
 }
 
 .venn-circle {
@@ -153,5 +154,5 @@ h1 {
 
 @media (max-width: 680px) {
   .layout { flex-direction: column; align-items: stretch; }
-  #venn   { width: 100%; height: 680px; }
+  #venn   { width: 100%; height: auto; }
 }
