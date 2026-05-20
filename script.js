@@ -103,17 +103,17 @@ const ARROW_SETS = [
 		label: "Strategic level\nCollaboration",
 		title: "Strategic level: Collaboration",
 		details:
-			"Collaboration refers to <strong><em>a higher level of engagement where public, private, and civil sector actors work together to design and implement shared actions that no single group could achieve alone.</em></strong> \n Through a holistic approach, stakeholders combine their expertise, resources, and capacities to strengthen community resilience through coordinated and integrated action. \n While some resilience actions remain sector-specific, collaborative initiatives create shared solutions across emergency planning, infrastructure protection, continuity of essential services, and support for vulnerable populations. In this way, collaboration strengthens societal resilience beyond what individual sectors can achieve independently. \n The TOGETHER project applied the <strong><em><a href=’https://www.arteliagroup.com/corporate_blog/towards-participatory-governance-of-climate-risks-through-public-private-civil-society-partnerships/’ target=’_blank’ rel=’noopener noreferrer’ style=’color:inherit;’>PPCP® Framework</a></em></strong>, which provides the structure and governance needed to support this collaboration, including guidance, tools, governance models, and coordination mechanisms that enable effective interaction and joint decision-making across sectors and levels.",
+			"Collaboration refers to <strong><em>a higher level of engagement where public, private, and civil sector actors work together to design and implement shared actions that no single group could achieve alone.</em></strong> \n Through a holistic approach, stakeholders combine their expertise, resources, and capacities to strengthen community resilience through coordinated and integrated action. \n While some resilience actions remain sector-specific, collaborative initiatives create shared solutions across emergency planning, infrastructure protection, continuity of essential services, and support for vulnerable populations. In this way, collaboration strengthens societal resilience beyond what individual sectors can achieve independently. \n The TOGETHER project applied the <strong><em><a href='https://www.arteliagroup.com/corporate_blog/towards-participatory-governance-of-climate-risks-through-public-private-civil-society-partnerships/' target='_blank' rel='noopener noreferrer' style='color:inherit;'>PPCP® Framework</a></em></strong>, which provides the structure and governance needed to support this collaboration, including guidance, tools, governance models, and coordination mechanisms that enable effective interaction and joint decision-making across sectors and levels.",
 		arrows: [
 			// Region 6 (c1∩c3): one arrow from each contributing circle
-			{ x1: 255, y1: 112, x2: 220, y2: 205, bi: false }, // 1 → 6
-			{ x1: 165, y1: 318, x2: 208, y2: 218, bi: false }, // 3 → 6
+			{ x1: 252, y1: 110, x2: 222, y2: 200, bi: false }, // 1 → 6
+			{ x1: 148, y1: 310, x2: 210, y2: 220, bi: false }, // 3 → 6
 			// Region 4 (c1∩c2): one arrow from each contributing circle
-			{ x1: 285, y1: 112, x2: 320, y2: 205, bi: false }, // 1 → 4
-			{ x1: 375, y1: 318, x2: 332, y2: 218, bi: false }, // 2 → 4
+			{ x1: 288, y1: 110, x2: 318, y2: 200, bi: false }, // 1 → 4
+			{ x1: 398, y1: 308, x2: 336, y2: 220, bi: false }, // 2 → 4
 			// Region 5 (c2∩c3): one arrow from each contributing circle
-			{ x1: 370, y1: 330, x2: 285, y2: 325, bi: false }, // 2 → 5
-			{ x1: 170, y1: 330, x2: 255, y2: 325, bi: false }, // 3 → 5
+			{ x1: 394, y1: 318, x2: 292, y2: 320, bi: false }, // 2 → 5
+			{ x1: 146, y1: 318, x2: 248, y2: 320, bi: false }, // 3 → 5
 		],
 	},
 	{
@@ -124,9 +124,9 @@ const ARROW_SETS = [
 		details:
 			"Communication and coordination help public, private, and civil sector actors understand each other’s roles, responsibilities, and resilience actions. \n While <strong><em>each sector operates independently within its own mandate and capacities, effective communication ensures that these actions are aligned, mutually supportive, and do not unintentionally hinder one another.</em></strong> \n For example, public authorities may share information about planned road closures or flood barriers with businesses and community organizations to help them adjust their operations and support access needs. Businesses may communicate their continuity plans to public authorities and community groups to coordinate efforts and minimize disruptions. Civil society organizations may provide feedback on the needs and vulnerabilities of communities to inform public policies and private sector initiatives. \n In this way, communication and coordination strengthen synergies across sectors and support a more coherent whole-of-society approach to disaster resilience.",
 		arrows: [
-			{ x1: 345, y1: 72, x2: 450, y2: 300, bi: true },
-			{ x1: 195, y1: 72, x2: 90, y2: 300, bi: true },
-			{ x1: 176, y1: 378, x2: 364, y2: 378, bi: true },
+			{ x1: 295, y1: 112, x2: 392, y2: 298, bi: true }, // c1 ↔ c2
+			{ x1: 245, y1: 112, x2: 148, y2: 298, bi: true }, // c1 ↔ c3
+			{ x1: 375, y1: 336, x2: 165, y2: 336, bi: true }, // c2 ↔ c3
 		],
 	},
 	{
@@ -465,7 +465,7 @@ document.addEventListener("click", () => {
 	panel.classList.add("fading");
 	setTimeout(() => {
 		panel.innerHTML =
-			'<p class="hint">Click a circle or an overlapping region to learn more.</p>';
+			'<p class="hint">Explore the diagram — click a circle, an overlap, or one of the buttons to learn more about the TOGETHER Concept Model.</p>';
 		panel.classList.remove("fading");
 	}, 140);
 });

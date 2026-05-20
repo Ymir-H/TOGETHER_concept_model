@@ -1,31 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TOGETHER Concept Model (TEST)</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>TOGETHER Concept Model (TEST)</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<h1>TOGETHER Concept Model (TEST)</h1>
 
-  <h1>TOGETHER Concept Model (TEST)</h1>
+		<nav id="tabs">
+			<button class="tab-btn active" data-tab="what">What is the TOGETHER Concept Model</button>
+			<button class="tab-btn" data-tab="how">How to use the TOGETHER Concept Model</button>
+		</nav>
 
-  <div id="arrow-toggles"></div>
+		<div id="tab-what" class="tab-panel active">
+			<div id="arrow-toggles"></div>
 
-  <div class="layout">
-    <svg id="venn" width="660" height="562" viewBox="0 0 540 460">
-      <defs id="clip-defs"></defs>
-      <g id="g-circles"></g>
-      <g id="g-intersections"></g>
-      <g id="g-arrows" style="pointer-events:none"></g>
-      <g id="g-labels"></g>
-    </svg>
+			<div class="layout">
+				<svg id="venn" width="660" height="562" viewBox="0 0 540 460">
+					<defs id="clip-defs"></defs>
+					<g id="g-circles"></g>
+					<g id="g-intersections"></g>
+					<g id="g-arrows" style="pointer-events: none"></g>
+					<g id="g-labels"></g>
+				</svg>
 
-    <aside id="panel">
-      <p class="hint">Click a circle or an overlapping region to learn more.</p>
-    </aside>
-  </div>
+				<aside id="panel">
+					<p class="hint">
+						Explore the diagram — click a circle, an overlap, or one of the
+						buttons to learn more about the TOGETHER Concept Model.
+					</p>
+				</aside>
+			</div>
+		</div>
 
-  <script src="script.js"></script>
-</body>
+		<div id="tab-how" class="tab-panel">
+			<p class="hint" style="margin-top: 2rem;">Content coming soon.</p>
+		</div>
+
+		<script src="script.js"></script>
+		<script>
+			document.querySelectorAll(".tab-btn").forEach((btn) => {
+				btn.addEventListener("click", () => {
+					document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+					document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
+					btn.classList.add("active");
+					document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+				});
+			});
+		</script>
+	</body>
 </html>
