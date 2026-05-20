@@ -23,7 +23,7 @@ h1 {
 .layout {
   display: flex;
   gap: 2.5rem;
-  align-items: flex-start;
+  align-items: stretch;
   width: 100%;
   max-width: 980px;
 }
@@ -81,7 +81,7 @@ h1 {
   border: 1px solid #ffffff12;
   border-radius: 14px;
   padding: 1.6rem 1.5rem;
-  min-height: 180px;
+  overflow-y: auto;
   transition: opacity 0.15s ease;
 }
 #panel.fading { opacity: 0; }
