@@ -14,7 +14,7 @@ const CIRCLES = [
 		color: "#4361ee",
 		title: "The public sector",
 		details:
-			"The public sector includes institutions at national, regional, and local levels (e.g., municipalities, government agencies, public operators) that implement risk prevention policies and play a central role in Disaster Risk Reduction (DRR) through planning, regulation, and resource provision.",
+			"The public sector includes <strong><em>institutions at national, regional, and local levels (e.g., municipalities, government agencies, public operators)</em></strong> that implement risk prevention policies and play a central role in Disaster Risk Reduction (DRR) through planning, regulation, and resource provision.",
 	},
 	{
 		id: "c2",
@@ -27,7 +27,7 @@ const CIRCLES = [
 		color: "#f72585",
 		title: "The civil society",
 		details:
-			"Civil society includes NGOs, associations, community groups, trade unions, and citizen collectives committed to environmental or social causes, offering knowledge of vulnerabilities and uses.",
+			"Civil society includes <strong><em>NGOs, associations, community groups, trade unions, and citizen collectives committed to environmental or social causes</em></strong>, offering knowledge of vulnerabilities and uses.",
 	},
 	{
 		id: "c3",
@@ -40,7 +40,7 @@ const CIRCLES = [
 		color: "#06d6a0",
 		title: "The private sector",
 		details:
-			"The private sector comprises for-profit entities of all sizes: companies, start-ups, chambers of commerce, service providers, technology suppliers (and contributes innovation, financing, and operational capacity). Their engagement often depends on social responsibility, economic interests, or risk exposure (e.g., in flood-prone areas).",
+			"The private sector comprises <strong><em>for-profit entities of all sizes: companies, start-ups, chambers of commerce, service providers, technology suppliers</em></strong> (and contributes innovation, financing, and operational capacity). Their engagement often depends on social responsibility, economic interests, or risk exposure (e.g., in flood-prone areas).",
 	},
 ];
 
@@ -52,45 +52,45 @@ const INTERSECTIONS = [
 		id: "i12",
 		clipOf: "c1",
 		clipBy: "c2",
-		label: "",
+		label: "Public-civil\ncollaboration",
 		lx: 328,
 		ly: 210,
 		title: "Public-civil collaboration",
 		details:
-			"Public-civil collaboration refers to partnerships between governments, public institutions, civil society organizations, community groups, academia, and other non-governmental stakeholders to strengthen disaster risk reduction, resilience, and sustainable development. By combining public sector leadership, policy, and coordination with the local knowledge, advocacy, and community engagement of civil society, these collaborations help promote inclusive decision-making, strengthen preparedness, reduce vulnerabilities, and support resilient communities and public systems.",
+			"Public-civil collaboration refers to partnerships between governments, public institutions, civil society organizations, community groups, academia, and other non-governmental stakeholders to strengthen disaster risk reduction, resilience, and sustainable development. \n By combining public sector leadership, policy, and coordination with the local knowledge, advocacy, and community engagement of civil society, these collaborations help promote inclusive decision-making, strengthen preparedness, reduce vulnerabilities, and support resilient communities and public systems.",
 	},
 	{
 		id: "i23",
 		clipOf: "c2",
 		clipBy: "c3",
-		label: "",
+		label: "Private-civil\ncollaboration",
 		lx: 270,
 		ly: 322,
 		title: "Private-civil collaboration",
 		details:
-			"Private-civil collaboration refers to partnerships between businesses, civil society organizations, community groups, academia, and other non-governmental stakeholders to advance disaster risk reduction, resilience, and sustainable development. By combining private sector innovation, resources, and technical expertise with the local knowledge, advocacy, and community engagement of civil society, these collaborations help strengthen preparedness, promote inclusive and people-centered solutions, and support more resilient communities and livelihoods.",
+			"Private-civil collaboration refers to partnerships between businesses, civil society organizations, community groups, academia, and other non-governmental stakeholders to advance disaster risk reduction, resilience, and sustainable development. \n By combining private sector innovation, resources, and technical expertise with the local knowledge, advocacy, and community engagement of civil society, these collaborations help strengthen preparedness, promote inclusive and people-centered solutions, and support more resilient communities and livelihoods.",
 	},
 	{
 		id: "i13",
 		clipOf: "c1",
 		clipBy: "c3",
-		label: "",
+		label: "Public-private\ncollaboration",
 		lx: 212,
 		ly: 210,
 		title: "Public-private collaboration",
 		details:
-			"Public-private collaboration brings together governments, international organizations, businesses, and other private sector partners to strengthen disaster risk reduction, resilience, and sustainable development. By combining public leadership and policy with private sector innovation, technology, investment, and expertise, these partnerships help communities and economies better prepare for disasters, reduce risks and vulnerabilities, and build more resilient infrastructure and systems.",
+			"Public-private collaboration brings together governments, international organizations, businesses, and other private sector partners to strengthen disaster risk reduction, resilience, and sustainable development. \n By combining public leadership and policy with private sector innovation, technology, investment, and expertise, these partnerships help communities and economies better prepare for disasters, reduce risks and vulnerabilities, and build more resilient infrastructure and systems.",
 	},
 	{
 		id: "i123",
 		clipOf: "c1",
 		clipBy: ["c2", "c3"],
-		label: "Societal \n Resilience",
+		label: "Societal\nResilience",
 		lx: 270,
 		ly: 254,
 		title: "Societal Resilience",
 		details:
-			"Societal resilience is built through the intersection of public, private, and civil sectors and their cross-sectoral, multi-level collaboration. It reflects a whole-of-society approach in which governments, businesses, civil society, communities, academia, and international organizations combine their leadership, knowledge, resources, innovation, and engagement to create safer, more inclusive, sustainable, and disaster-resilient societies. Through coordinated action and shared responsibility, societal resilience helps protect lives, livelihoods, infrastructure, ecosystems, and development gains while strengthening the capacity to face future risks and uncertainties.",
+			"Societal resilience is built through <strong><em>the intersection of public, private, and civil sectors and their cross-sectoral, multi-level collaboration</em></strong>. It reflects a whole-of-society approach in which governments, businesses, civil society, communities, academia, and international organizations combine their leadership, knowledge, resources, innovation, and engagement to create safer, more inclusive, sustainable, and disaster-resilient societies. \n Through coordinated action and shared responsibility, societal resilience helps protect lives, livelihoods, infrastructure, ecosystems, and development gains while strengthening the capacity to face future risks and uncertainties.",
 	},
 ];
 
@@ -98,25 +98,12 @@ const INTERSECTIONS = [
 // bi:true = bidirectional (marker on both ends); bi:false = single direction (marker-end only).
 const ARROW_SETS = [
 	{
-		id: "green",
-		color: "#ffd700",
-		label: "Strategic level: communication and coordination",
-		title: "Strategic level: communication and coordination",
-		details:
-			"Communication and coordination help public, private, and civil sector actors understand each other’s roles, responsibilities, and resilience actions. While each sector operates independently within its own mandate and capacities, effective communication ensures that these actions are aligned, mutually supportive, and do not unintentionally hinder one another.",
-		arrows: [
-			{ x1: 338, y1: 72, x2: 448, y2: 318, bi: true },
-			{ x1: 202, y1: 72, x2: 92, y2: 318, bi: true },
-			{ x1: 165, y1: 408, x2: 375, y2: 408, bi: true },
-		],
-	},
-	{
 		id: "orange",
 		color: "#ff7043",
-		label: "Strategic level: collaboration",
-		title: "Strategic level: collaboration",
+		label: "Strategic level\nCollaboration",
+		title: "Strategic level: Collaboration",
 		details:
-			"Collaboration refers to a higher level of engagement where public, private, and civil sector actors work together to design and implement shared actions that no single group could achieve alone. Through a holistic approach, stakeholders combine their expertise, resources, and capacities to strengthen community resilience through coordinated and integrated action. \n While some resilience actions remain sector-specific, collaborative initiatives create shared solutions across emergency planning, infrastructure protection, continuity of essential services, and support for vulnerable populations. In this way, collaboration strengthens societal resilience beyond what individual sectors can achieve independently. \n The TOGETHER project applied the PPCP® Framework, which provides the structure and governance needed to support this collaboration, including guidance, tools, governance models, and coordination mechanisms that enable effective interaction and joint decision-making across sectors and levels.",
+			"Collaboration refers to <strong><em>a higher level of engagement where public, private, and civil sector actors work together to design and implement shared actions that no single group could achieve alone.</em></strong> \n Through a holistic approach, stakeholders combine their expertise, resources, and capacities to strengthen community resilience through coordinated and integrated action. \n While some resilience actions remain sector-specific, collaborative initiatives create shared solutions across emergency planning, infrastructure protection, continuity of essential services, and support for vulnerable populations. In this way, collaboration strengthens societal resilience beyond what individual sectors can achieve independently. \n The TOGETHER project applied the <strong><em><a href=’https://www.arteliagroup.com/corporate_blog/towards-participatory-governance-of-climate-risks-through-public-private-civil-society-partnerships/’ target=’_blank’ rel=’noopener noreferrer’ style=’color:inherit;’>PPCP® Framework</a></em></strong>, which provides the structure and governance needed to support this collaboration, including guidance, tools, governance models, and coordination mechanisms that enable effective interaction and joint decision-making across sectors and levels.",
 		arrows: [
 			// Region 6 (c1∩c3): one arrow from each contributing circle
 			{ x1: 255, y1: 112, x2: 220, y2: 205, bi: false }, // 1 → 6
@@ -130,12 +117,25 @@ const ARROW_SETS = [
 		],
 	},
 	{
+		id: "green",
+		color: "#ffd700",
+		label: "Strategic level\nCommunication and coordination",
+		title: "Strategic level: Communication and coordination",
+		details:
+			"Communication and coordination help public, private, and civil sector actors understand each other’s roles, responsibilities, and resilience actions. \n While <strong><em>each sector operates independently within its own mandate and capacities, effective communication ensures that these actions are aligned, mutually supportive, and do not unintentionally hinder one another.</em></strong> \n For example, public authorities may share information about planned road closures or flood barriers with businesses and community organizations to help them adjust their operations and support access needs. Businesses may communicate their continuity plans to public authorities and community groups to coordinate efforts and minimize disruptions. Civil society organizations may provide feedback on the needs and vulnerabilities of communities to inform public policies and private sector initiatives. \n In this way, communication and coordination strengthen synergies across sectors and support a more coherent whole-of-society approach to disaster resilience.",
+		arrows: [
+			{ x1: 345, y1: 72, x2: 450, y2: 300, bi: true },
+			{ x1: 195, y1: 72, x2: 90, y2: 300, bi: true },
+			{ x1: 176, y1: 378, x2: 364, y2: 378, bi: true },
+		],
+	},
+	{
 		id: "blue",
 		color: "#29b6f6",
-		label: "Operational leve: coordinated sectoral resilience actions",
-		title: "Operational leve: coordinated sectoral resilience actions",
+		label: "Operational level\nCoordinated sectoral resilience actions",
+		title: "Operational level: Coordinated sectoral resilience actions",
 		details:
-			"In operation, each sector undertakes its own resilience actions while aligning them with the activities of others through strategic communication and coordination. For example, businesses may focus on maintaining operations during and after a crisis to support economic and community continuity. Public authorities may implement measures such as temporary flood defences to protect communities and critical infrastructure. Civil society organizations and community groups, such as food banks, may prepare their own response plans to continue supporting vulnerable populations during disasters. Coordination between these actors helps ensure that actions taken by one group — such as road closures or flood barriers — do not unintentionally disrupt the activities and access needs of another. In this way, communication and coordination strengthen synergies across sectors and support a more coherent whole-of-society approach to disaster resilience.",
+			"In operation, <strong><em>each sector undertakes its own resilience actions while aligning them with the activities of others through strategic communication and coordination.</em></strong> \n For example, businesses may focus on maintaining operations during and after a crisis to support economic and community continuity. Public authorities may implement measures such as temporary flood defences to protect communities and critical infrastructure. Civil society organizations and community groups, such as food banks, may prepare their own response plans to continue supporting vulnerable populations during disasters. \n Coordination between these actors helps ensure that actions taken by one group, such as road closures or flood barriers, do not unintentionally disrupt the activities and access needs of another. In this way, communication and coordination strengthen synergies across sectors and support a more coherent whole-of-society approach to disaster resilience.",
 		arrows: [
 			{ x1: 270, y1: 112, x2: 270, y2: 232, bi: false },
 			{ x1: 392, y1: 295, x2: 304, y2: 259, bi: false },
@@ -145,10 +145,10 @@ const ARROW_SETS = [
 	{
 		id: "purple",
 		color: "#ce93d8",
-		label: "Operational leve: collabrative actions",
-		title: "Operational leve: collabrative actions",
+		label: "Operational level\nCollaborative actions",
+		title: "Operational level: Collaborative actions",
 		details:
-			"While some resilience actions remain sector-specific, collaborative initiatives create shared solutions across emergency planning, infrastructure protection, continuity of essential services, and support for vulnerable populations. In this way, collaboration strengthens societal resilience beyond what individual sectors can achieve independently. For example, public authorities, businesses, and community organizations may jointly develop resilience solutions that integrate emergency planning, infrastructure protection, continuity of essential services, and support for vulnerable populations. Through this process, collaboration enables collective action that strengthens societal resilience beyond what individual sectors could achieve independently.",
+			"While some resilience actions remain sector-specific, <strong><em>collaborative initiatives create shared solutions across emergency planning, infrastructure protection, continuity of essential services, and support for vulnerable populations.</em></strong> \n In this way, collaboration strengthens societal resilience beyond what individual sectors can achieve independently. For example, public authorities, businesses, and community organizations may jointly develop resilience solutions that integrate emergency planning, infrastructure protection, continuity of essential services, and support for vulnerable populations. \n Through this process, collaboration enables collective action that strengthens societal resilience beyond what individual sectors could achieve independently.",
 		arrows: [
 			{ x1: 316, y1: 204, x2: 283, y2: 247, bi: false },
 			{ x1: 270, y1: 310, x2: 270, y2: 263, bi: false },
@@ -167,6 +167,7 @@ const circleMap = Object.fromEntries(CIRCLES.map((c) => [c.id, c]));
 let activeEl = null;
 let activePanelItem = null;
 let activePanelColor = null;
+const collabLabels = {}; // ix.id → SVG text element, shown only on hover/click
 
 function svgEl(tag, attrs) {
 	const node = document.createElementNS(SVG_NS, tag);
@@ -183,13 +184,19 @@ function showPanel(item, dotColor) {
 			: item.color
 				? "Sectors"
 				: "Intersection";
+		const paragraphs = item.details
+			.split("\n")
+			.map((s) => s.trim())
+			.filter(Boolean)
+			.map((s) => `<p class="panel-body">${s}</p>`)
+			.join("");
 		panel.innerHTML = `
       <div id="panel-type">
         ${dotColor ? `<span id="panel-dot" style="background:${dotColor}"></span>` : ""}
         ${typeLabel}
       </div>
       <h2 id="panel-title">${item.title}</h2>
-      <p  id="panel-body">${item.details}</p>
+      ${paragraphs}
     `;
 		panel.classList.remove("fading");
 	}, 140);
@@ -197,7 +204,11 @@ function showPanel(item, dotColor) {
 
 function activate(e, item, el, dotColor) {
 	e.stopPropagation();
-	if (activeEl) activeEl.classList.remove("active");
+	if (activeEl) {
+		activeEl.classList.remove("active");
+		if (activeEl._ixId && collabLabels[activeEl._ixId])
+			collabLabels[activeEl._ixId].style.opacity = "0";
+	}
 	el.classList.remove("clicked");
 	void el.offsetWidth; // restart animation
 	el.classList.add("clicked", "active");
@@ -265,7 +276,17 @@ function render() {
 			"clip-path": `url(#cp-${ix.id})`,
 			class: "venn-intersection",
 		});
+		overlay._ixId = ix.id;
 		overlay.addEventListener("click", (e) => activate(e, ix, overlay, null));
+		if (ix.id !== "i123") {
+			overlay.addEventListener("mouseenter", () => {
+				if (collabLabels[ix.id]) collabLabels[ix.id].style.opacity = "1";
+			});
+			overlay.addEventListener("mouseleave", () => {
+				if (collabLabels[ix.id] && !overlay.classList.contains("active"))
+					collabLabels[ix.id].style.opacity = "0";
+			});
+		}
 		ixLayer.appendChild(overlay);
 	});
 
@@ -293,9 +314,14 @@ function render() {
 	CIRCLES.forEach((c) =>
 		labelsLayer.appendChild(makeLabelText(c.lx, c.ly, c.label)),
 	);
-	INTERSECTIONS.forEach((ix) =>
-		labelsLayer.appendChild(makeLabelText(ix.lx, ix.ly, ix.label)),
-	);
+	INTERSECTIONS.forEach((ix) => {
+		const txt = makeLabelText(ix.lx, ix.ly, ix.label);
+		if (ix.id !== "i123") {
+			txt.style.opacity = "0";
+			collabLabels[ix.id] = txt;
+		}
+		labelsLayer.appendChild(txt);
+	});
 }
 
 function renderArrows() {
@@ -396,7 +422,10 @@ function renderArrows() {
 
 		const btn = document.createElement("button");
 		btn.className = "arrow-btn";
-		btn.textContent = set.label;
+		const [prefix, ...rest] = set.label.split("\n");
+		btn.innerHTML = rest.length
+			? `<span class="btn-prefix">${prefix}</span><br><span class="btn-main">${rest.join(" ")}</span>`
+			: set.label;
 		btn.style.setProperty("--set-color", set.color);
 		btn.addEventListener("click", (e) => {
 			e.stopPropagation();
@@ -410,6 +439,10 @@ function renderArrows() {
 			activePanelItem = set;
 			activePanelColor = set.color;
 			showPanel(set, set.color);
+			if (!btn.classList.contains("active")) group.style.display = "block";
+		});
+		btn.addEventListener("mouseleave", () => {
+			if (!btn.classList.contains("active")) group.style.display = "none";
 		});
 		toggleDiv.appendChild(btn);
 	});
@@ -425,6 +458,9 @@ document.addEventListener("click", () => {
 	}
 	activePanelItem = null;
 	activePanelColor = null;
+	Object.values(collabLabels).forEach((lbl) => {
+		lbl.style.opacity = "0";
+	});
 	const panel = document.getElementById("panel");
 	panel.classList.add("fading");
 	setTimeout(() => {
