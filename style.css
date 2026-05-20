@@ -152,7 +152,7 @@ h1 {
 .arrow-line { transition: stroke-opacity 0.15s ease; }
 .arrow-line:hover { stroke-opacity: 0.65; cursor: pointer; }
 
-@media (max-width: 680px) {
+@media (max-width: 760px) {
   .layout { flex-direction: column; align-items: stretch; }
   #venn   { width: 100%; height: auto; }
 }
